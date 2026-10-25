@@ -17,7 +17,7 @@
         // Redirect hash-based auth to /auth/callback
         var hash = window.location.hash;
         if (hash && (hash.includes('access_token=') || hash.includes('error=') || hash.includes('type=recovery'))) {
-          window.location.replace('/convees/auth/callback' + window.location.search + hash);
+          window.location.replace('/convees-80smonk/auth/callback' + window.location.search + hash);
         }
       })();
     </script>

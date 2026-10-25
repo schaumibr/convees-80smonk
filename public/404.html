@@ -2,14 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Convees</title>
+  <title>CONVEES</title>
   <script>
-    // GitHub Pages 404 → redirect to index.html with full path preserved
+    // Save the full URL path (including #access_token for password reset)
     sessionStorage.setItem(
       'redirect',
       location.pathname + location.search + location.hash
     );
-    location.replace('/convees/');
+    
+    // Redirect to your NEW GitHub Pages repository root
+    location.replace('/convees-80smonk/');
   </script>
 </head>
 <body></body>
