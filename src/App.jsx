@@ -6,6 +6,7 @@ import Features from './pages/Features'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import ResetPassword from './pages/ResetPassword'
+import VerifyEmail from './pages/VerifyEmail';
 
 
 
@@ -20,7 +21,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-     
+     <Route path="/verify-email" element={<VerifyEmail />} />
         </Route>
       </Routes>
     </BrowserRouter>
