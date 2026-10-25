@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import ResetPassword from './pages/ResetPassword'
 
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+     
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Convees</title>
+  <script>
+    // GitHub Pages 404 → redirect to index.html with full path preserved
+    sessionStorage.setItem(
+      'redirect',
+      location.pathname + location.search + location.hash
+    );
+    location.replace('/convees/');
+  </script>
+</head>
+<body></body>
+</html>

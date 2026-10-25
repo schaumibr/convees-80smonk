@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Email Verified - Convees</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #EFF6FF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            padding: 32px 24px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+        /* ─── Logo ─── */
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1E293B;
+            letter-spacing: -0.5px;
+        }
+        .icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 22px;
+            color: #1E293B;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        p {
+            font-size: 15px;
+            color: #64748B;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        /* ─── Footer (Website Link) ─── */
+        .footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+        }
+        .website-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #208AEF;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        .website-link:hover {
+            background-color: #EFF6FF;
+        }
+        .website-link svg {
+            width: 16px;
+            height: 16px;
+        }
+        .app-name {
+            font-size: 13px;
+            color: #94A3B8;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-wrapper">
+            <img src="convees-logo.png" alt="Convees" class="logo-img" />
+            <span class="brand-name">Convees</span>
+        </div>
+        <div class="icon">✅</div>
+        <h1>Account Verified!</h1>
+        <p>Your email has been successfully verified.</p>
+        <p>You can now close this page and sign in to the Convees app.</p>
+        
+        <div class="footer">
+            <a href="https://schaumibr.github.io/convees-80smonk/" class="website-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                Visit Convees Website
+            </a>
+        </div>
+    </div>
+</body>
+</html>
