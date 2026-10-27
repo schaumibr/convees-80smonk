@@ -5,21 +5,93 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-default>Communitas - Building Stronger Neighborhoods</title>
-       <script>
-      (function() {
-        // Restore redirect from 404.html
-        var redirect = sessionStorage.getItem('redirect');
-        sessionStorage.removeItem('redirect');
-        if (redirect) {
-          history.replaceState(null, null, redirect);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+        var SUPABASE_URL = 'https://wnweqxekguwqgyzjqqtm.supabase.co';
+        var SUPABASE_ANON_KEY = 'sb_publishable_ykZrHF6yMYexN5OCF_sLgA_kyNuHgeO';
+        var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        var hashParams = new URLSearchParams(window.location.hash.substring(1));
+        var searchParams = new URLSearchParams(window.location.search);
+
+        var error = hashParams.get('error') || searchParams.get('error');
+        var errorDesc = hashParams.get('error_description') || searchParams.get('error_description');
+        var type = hashParams.get('type') || searchParams.get('type');
+        var code = searchParams.get('code');
+
+        function showMessage(text, msgType) {
+            var el = document.getElementById('message');
+            el.textContent = text;
+            el.className = 'message ' + msgType;
         }
 
-        // Redirect hash-based auth to /auth/callback
-        var hash = window.location.hash;
-        if (hash && (hash.includes('access_token=') || hash.includes('error=') || hash.includes('type=recovery'))) {
-          window.location.replace('/convees-80smonk/auth/callback' + window.location.search + hash);
+        async function handleSubmit(e) {
+            e.preventDefault();
+            var pw = document.getElementById('password').value;
+            var cpw = document.getElementById('confirmPassword').value;
+            var btn = document.getElementById('submitBtn');
+
+            if (pw !== cpw) { showMessage('Passwords do not match.', 'error'); return; }
+            if (pw.length < 8) { showMessage('Password must be at least 8 characters.', 'error'); return; }
+
+            btn.disabled = true;
+            btn.textContent = 'Updating...';
+
+            try {
+                var result = await sb.auth.updateUser({ password: pw });
+                if (result.error) {
+                    showMessage(result.error.message, 'error');
+                    btn.disabled = false;
+                    btn.textContent = 'Update Password';
+                } else {
+                    showMessage('Password updated! You can close this page and sign in with your new password.', 'success');
+                    document.getElementById('resetForm').style.display = 'none';
+                }
+            } catch (err) {
+                showMessage('Something went wrong. Please try again.', 'error');
+                btn.disabled = false;
+                btn.textContent = 'Update Password';
+            }
         }
-      })();
+
+        // Decide which section to show
+        (async function() {
+            // Error case
+            if (error) {
+                document.getElementById('errorSection').classList.remove('hidden');
+                var msg = errorDesc ? decodeURIComponent(errorDesc.replace(/\+/g, ' ')) : 'This link is invalid or has expired.';
+                document.getElementById('errorText').textContent = msg + ' Please request a new one from the app.';
+                return;
+            }
+
+            // PKCE code exchange
+            if (code) {
+                var res = await sb.auth.exchangeCodeForSession(code);
+                if (res.error) {
+                    document.getElementById('errorSection').classList.remove('hidden');
+                    document.getElementById('errorText').textContent = res.error.message;
+                    return;
+                }
+                // After code exchange, check type
+                if (type === 'recovery') {
+                    document.getElementById('resetSection').classList.remove('hidden');
+                    document.body.style.backgroundColor = '#F0FDF4';
+                } else {
+                    document.getElementById('verifiedSection').classList.remove('hidden');
+                    document.body.style.backgroundColor = '#EFF6FF';
+                }
+                return;
+            }
+
+            // Hash-based token (implicit flow)
+            if (type === 'recovery') {
+                document.getElementById('resetSection').classList.remove('hidden');
+                document.body.style.backgroundColor = '#F0FDF4';
+            } else {
+                document.getElementById('verifiedSection').classList.remove('hidden');
+                document.body.style.backgroundColor = '#EFF6FF';
+            }
+        })();
     </script>
   </head>
   <body>
